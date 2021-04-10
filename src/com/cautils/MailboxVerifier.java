@@ -21,7 +21,7 @@ public class MailboxVerifier {
     }
 
     public String verifySingleMailbox(final String mailboxAddress) throws IOException {
-        URL url = new URL(String.format(REQUEST_SCHEME, API_KEY, mailboxAddress));
+        URL url = new URL(String.format(REQUEST_SCHEME, API_KEY, mailboxAddress.toLowerCase()));
         HttpURLConnection con = fetchURL(url, GET_HTTP_METHOD);
         return getResponse(con);
     }
