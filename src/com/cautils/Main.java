@@ -1,7 +1,7 @@
 package com.cautils;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +11,16 @@ import com.cautils.models.Result;
 public class Main {
 
     public static void main(String[] args) {
+        String pathToInputFile = args[1];
+        List<String> mailboxes;
+        BufferedReader reader = new BufferedReader(new FileReader(pathToInputFile));
+        boolean isEOF;
+        do{
+            String line = reader.readLine();
+            mailboxes.add(line);
+            isEOF = line == null;
+        } while (!isEOF);
         MailboxVerifier verifier = MailboxVerifier.getInstance();
-        List<String> mailboxes = Arrays.asList(
-                "tomer.smadja@cloudally.com",
-                "tomer1smadja@gmail.com",
-                "tomp1smadja@gmail.com"
-        );
         Map<String, Result> results = new HashMap<>();
         for (String address : mailboxes){
             String rawResult = verifier.verifySingleMailbox(address);
